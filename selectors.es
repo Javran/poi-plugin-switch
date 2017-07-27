@@ -70,6 +70,38 @@ const pluginInfoListSelector = createSelector(
   )
 )
 
+const starredPluginsSelector = createSelector(
+  configSelector,
+  c => c.starredPlugins)
+
+const splittedPluginInfoListSelector = createSelector(
+  pluginInfoListSelector,
+  starredPluginsSelector,
+  (pluginInfoList, starredPlugins) => {
+    const [starredUnsorted, normal] =
+      _.partition(
+        pluginInfoList.map(pluginInfo => ({
+          ...pluginInfo,
+          starred: starredPlugins.includes(pluginInfo.pluginName),
+        })),
+        p => p.starred)
+    const starred = starredUnsorted.sort(
+      projectorToComparator(({pluginName}) =>
+        starredPlugins.indexOf(pluginName))
+    )
+
+    return {starred, normal}
+  }
+)
+
+const normalPluginInfoListSelector = createSelector(
+  splittedPluginInfoListSelector,
+  sp => sp.normal)
+
+const starredPluginInfoListSelector = createSelector(
+  splittedPluginInfoListSelector,
+  sp => sp.starred)
+
 // break tie while sorting by taking into account plugin priority
 // and lastly pluginName
 const pluginResolvingComparator =
@@ -82,7 +114,7 @@ const pluginResolvingComparator =
    MRU: Most Recently Used
  */
 const pluginInfoListMFUSelector = createSelector(
-  pluginInfoListSelector,
+  normalPluginInfoListSelector,
   xs => [...xs].sort(
     chainComparators(
       flipComparator(projectorToComparator(p => p.record.count)),
@@ -90,7 +122,7 @@ const pluginInfoListMFUSelector = createSelector(
 )
 
 const pluginInfoListMRUSelector = createSelector(
-  pluginInfoListSelector,
+  normalPluginInfoListSelector,
   xs => [...xs].sort(
     chainComparators(
       flipComparator(projectorToComparator(p => p.record.lastTime)),
@@ -99,9 +131,10 @@ const pluginInfoListMRUSelector = createSelector(
 
 const actualPluginInfoListSelector = createSelector(
   configSelector,
+  starredPluginInfoListSelector,
   pluginInfoListMFUSelector,
   pluginInfoListMRUSelector,
-  (config, mfuList, mruList) => {
+  (config, starredList, mfuList, mruList) => {
     const {view, limit} = config
     const limiter = limit === null ?
       _.identity : xs => _.take(xs,limit)
@@ -110,7 +143,7 @@ const actualPluginInfoListSelector = createSelector(
       view === 'most-frequent' ? mfuList :
       view === 'most-recent' ? mruList :
       (console.error(`invalid view: ${view}`), [])
-    return limiter(list)
+    return [...starredList, ...limiter(list)]
   }
 )
 

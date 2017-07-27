@@ -27,8 +27,9 @@ const emptyPState = {
     limit: null, // null = no limit, otherwise a positive int
     switchByMidClick: true,
     switchByKey: null,
+    starredPlugins: [], // Array of starred plugins
   },
-  dataVersion: 'initial',
+  dataVersion: 'initial-a',
 }
 
 // using downcase for types, otherwise it messes up autocomplete
@@ -73,9 +74,16 @@ const savePState = pState => {
   }
 }
 
+const updatePState = oldPState => {
+  if (oldPState.dataVersion === emptyPState.dataVersion)
+    return oldPState
+
+  throw new Error('failed to update the config')
+}
+
 const loadPState = () => {
   try {
-    return readJsonSync(getPStateFilePath())
+    return updatePState(readJsonSync(getPStateFilePath()))
   } catch (err) {
     if (err.syscall !== 'open' || err.code !== 'ENOENT') {
       console.error('Error while loading config', err)
