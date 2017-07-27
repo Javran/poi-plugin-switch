@@ -20,6 +20,7 @@ class SwitchMainImpl extends Component {
     view: PTyp.ViewMode.isRequired,
     pluginInfoList: PTyp.array.isRequired,
     configModify: PTyp.func.isRequired,
+    poiSwitchToPlugin: PTyp.func.isRequired,
   }
 
   modifyStarredPlugins = modifier =>
@@ -47,6 +48,9 @@ class SwitchMainImpl extends Component {
         newSp[ind2] = sp[ind1]
         return newSp
       })
+
+  handleSwitchToPlugin = pluginName => () =>
+    this.props.poiSwitchToPlugin(pluginName)
 
   render() {
     const {
@@ -89,6 +93,7 @@ class SwitchMainImpl extends Component {
                   style={{display: 'flex', alignItems: 'center'}}>
                   <Button
                     bsStyle={bsStyle}
+                    onClick={this.handleSwitchToPlugin(pluginInfo.pluginName)}
                     style={{flex: 1, display: 'flex', alignItems: 'center'}}>
                     <FontAwesome name={icon} style={{marginRight: '.5em', width: '1.2em'}} />
                     <span>{pluginInfo.state.name}</span>

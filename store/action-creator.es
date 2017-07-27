@@ -21,6 +21,11 @@ const actionCreator = {
       ...newConfig,
       ready: true,
     }),
+
+  poiSwitchToPlugin: activePluginName => ({
+    type: '@@TabSwitch',
+    tabInfo: {activePluginName},
+  }),
 }
 
 const mapDispatchToProps = _.memoize(dispatch =>
