@@ -1,0 +1,20 @@
+{
+  "Package": {
+    "Title" : "Switch",
+    "Desc": "Plugin switcher"
+  },
+
+  "Main": {
+    "MostFrequentlyUsed": "Most Frequently Used",
+    "MostRecentlyUsed": "Most Recently Used"
+  },
+
+  "Settings": {
+    "SwitchToThisPluginOn": "Switch to this plugin on",
+    "MouseMiddleClick": "Mouse middle click",
+    "KeyPressDisabled": "Key press disabled",
+    "KeyPressEnabled": "Key press '%s'",
+    "LimitUnstarred": "Limit unstarred plugins",
+    "ClearAllRecords": "Clear all records"
+  }
+}

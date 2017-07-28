@@ -1,0 +1,20 @@
+{
+  "Package": {
+    "Title" : "插件切换",
+    "Desc": "插件切换器"
+  },
+
+  "Main": {
+    "MostFrequentlyUsed": "最常使用",
+    "MostRecentlyUsed": "最近使用"
+  },
+
+  "Settings": {
+    "SwitchToThisPluginOn": "使用下列方法切换到本插件",
+    "MouseMiddleClick": "点击鼠标中键",
+    "KeyPressDisabled": "按键已禁用",
+    "KeyPressEnabled": "按键 '%s'",
+    "LimitUnstarred": "限制未加星插件显示数量",
+    "ClearAllRecords": "清除全部记录"
+  }
+}

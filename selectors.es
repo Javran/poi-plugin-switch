@@ -154,6 +154,7 @@ const viewSelector = createSelector(
 export {
   extSelector,
   extReadySelector,
+  configSelector,
   switchCounterRecordsSelector,
   pStateSelector,
   actualPluginInfoListSelector,

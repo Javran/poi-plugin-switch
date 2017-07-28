@@ -14,6 +14,7 @@ import {
   actualPluginInfoListSelector,
 } from '../selectors'
 import { PTyp } from '../ptyp'
+import { __ } from '../tr'
 
 class SwitchMainImpl extends Component {
   static propTypes = {
@@ -63,8 +64,8 @@ class SwitchMainImpl extends Component {
           style={{display: 'flex', marginBottom: '.8em'}}>
           {
             [
-              ['most-frequent', 'Most Frequently Used'],
-              ['most-recent', 'Most Recently Used'],
+              ['most-frequent', __('Main.MostFrequentlyUsed')],
+              ['most-recent', __('Main.MostRecentlyUsed')],
             ].map(([key,content]) => (
               <Button
                 onClick={this.handleSwitchViewMode(key)}

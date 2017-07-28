@@ -41,6 +41,16 @@ const reducer = (state = initState, action) => {
     ])(state)
   }
 
+  if (!state.ready)
+    return state
+
+  if (action.type === '@poi-plugin-switch@switchCounter@Clear') {
+    return {
+      ...state,
+      records: {},
+    }
+  }
+
   return state
 }
 

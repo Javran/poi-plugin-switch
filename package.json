@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/Javran/poi-plugin-switch#readme",
   "poiPlugin": {
-    "title": "Switch",
+    "title": "Package.Title",
+    "description": "Package.Desc",
     "priority": 65535,
     "icon": "cogs"
   },

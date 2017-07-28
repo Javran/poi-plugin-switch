@@ -15,6 +15,9 @@ const actionCreator = {
     type: '@poi-plugin-switch@switchCounter@Merge',
     records,
   }),
+  switchCounterClear: () => ({
+    type: '@poi-plugin-switch@switchCounter@Clear',
+  }),
 
   configReady: newConfig =>
     actionCreator.configReplace({

@@ -1,7 +1,9 @@
 import { SwitchMain as reactClass } from './ui'
+import { Settings as settingsClass } from './ui/settings'
 import { reducer, withBoundActionCreator } from './store'
 import { loadPState } from './p-state'
 import { observeAll } from './observers'
+import { eventHandler } from './event-handler'
 
 // for observer
 let unsubscribe = null
@@ -27,9 +29,14 @@ const pluginDidLoad = () => {
     })
     pStateInitId = null
   })
+  window.addEventListener('keyup', eventHandler)
+  window.addEventListener('mouseup', eventHandler)
 }
 
 const pluginWillUnload = () => {
+  window.removeEventListener('keyup', eventHandler)
+  window.removeEventListener('mouseup', eventHandler)
+
   if (typeof unsubscribe !== 'function') {
     console.error(`invalid unsubscribe function`)
   } else {
@@ -47,5 +54,6 @@ export {
   pluginDidLoad,
   pluginWillUnload,
   reactClass,
+  settingsClass,
   reducer,
 }

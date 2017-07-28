@@ -25,7 +25,7 @@ const emptyPState = {
   config: {
     view: 'most-frequent', // most-recent / most-frequent
     limit: null, // null = no limit, otherwise a positive int
-    switchByMidClick: true,
+    switchByMidClick: false,
     switchByKey: null,
     starredPlugins: [], // Array of starred plugins
   },
