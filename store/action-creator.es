@@ -28,6 +28,7 @@ const actionCreator = {
   poiSwitchToPlugin: activePluginName => ({
     type: '@@TabSwitch',
     tabInfo: {activePluginName},
+    payload: {tabInfo: {activePluginName}},
   }),
 }
 
